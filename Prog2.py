@@ -1,11 +1,4 @@
-# Задано масив з N цілих чисел.
-# Сформувати масив таким чином, щоб спочатку були всі від’ємні елементи масиву, потім додатні і, після них нульові, зберігши порядок.
-# Якщо якоїсь групи чисел не існує, то після кожного числа, що дорівнює K вставити рандомне число х цієї групи.
-# Наприклад, -5 0 -4 0 -5 -6 0. K= -5. Немає додатних чисел. -5 7 -4 -5 6 -6 0 0 0.
-# Числа 7 і 6 - рандомні, після кожного -5.
-
 import random
-
 
 def NaturalValidation(k):
     while k.isdigit() == False:
@@ -56,10 +49,72 @@ def StrangeSort(array):
     return array
 
 
+def BinarySearch(array, value):
+    temp=[]
+    indx = []
+    searchOp=0
+    allOp=0
+    for i in range(0, len(array)):
+        temp.append((array[i], i))
+        allOp+=1
+    temp.sort()
+    allOp += 1
+
+    mid = len(temp) // 2
+    low = 0
+    high = len(temp) - 1
+    while temp[mid][0] != value and low <= high:
+        if value > temp[mid][0]:
+            low = mid + 1
+            searchOp+=1
+        else:
+            high = mid - 1
+            searchOp+=1
+        mid = (low + high) // 2
+        searchOp += 1
+    if low > high:
+        print("No value")
+        allOp += 1
+    indx.append(mid)
+    allOp += 1
+
+    mid1 = mid2 = mid
+    searchOp += 1
+    while (temp[mid1][0] == temp[mid1-1][0]) & (mid1 != 0):
+        mid1 -= 1
+        searchOp += 1
+        indx.append(mid1)
+        allOp += 1
+    while (temp[mid2][0] == temp[mid2 + 1][0]) & (mid1 != len(temp)-1):
+        mid2 += 1
+        searchOp += 1
+        indx.append(mid2)
+        allOp += 1
+
+    for i in range(0, len(indx)):
+        indx[i]=temp[indx[i]][1]
+        allOp += 1
+
+    indx.sort()
+    allOp += 1
+    allOp+=searchOp
+    print('Number of search operations: ', searchOp)
+    print('Number of all operations: ', allOp)
+    return indx
+
+
 N = input('Enter N: ')
 N = NaturalValidation(N)
 array = []
 for i in range (0, N):
     array.append(IntValidation(input('Enter element of array: ')))
 
-print(StrangeSort(array))
+
+
+array1 = StrangeSort(array)
+print(array1)
+
+value = input('Enter value you want to find: ')
+value=IntValidation(value)
+
+print('Indexes of elements you need: ', BinarySearch(array1, int(value)))
