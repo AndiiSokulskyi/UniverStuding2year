@@ -48,10 +48,10 @@ def StrangeSort(array):
         K = IntValidation(K)
         addlen=0
         for i in range(0, len(array)):
-            if array[i] == k:
+            if array[i] == K:
                 addlen+=1
         for i in range(0, len(array)+addlen):
-            if array[i] == k:
+            if array[i] == K:
                 array.insert(i+1, random.randint(-1000, 1000))
     return array
 
