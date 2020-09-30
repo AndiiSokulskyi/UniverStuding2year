@@ -1,3 +1,4 @@
+#Task #14
 def NaturalValidation(k):
     while k.isdigit() == False:
         k = input('Please enter a natural number: ')
