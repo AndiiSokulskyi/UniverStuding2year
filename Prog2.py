@@ -18,7 +18,7 @@ def IntValidation(k):
     return newk
 
 
-def StrangeSort(array):
+def StrangeSort(array, K, rang):
     negat=[]
     poset=[]
     zeros=[]
@@ -37,15 +37,13 @@ def StrangeSort(array):
     for i in range(0, len(zeros)):
         array.append(zeros[i])
     if (len(negat)==0)|(len(poset)==0)|(len(zeros)==0):
-        K = input('Enter K: ')
-        K = IntValidation(K)
         addlen=0
         for i in range(0, len(array)):
             if array[i] == K:
                 addlen+=1
         for i in range(0, len(array)+addlen):
             if array[i] == K:
-                array.insert(i+1, random.randint(-1000, 1000))
+                array.insert(i+1, random.randint(-rang, rang))
     return array
 
 
@@ -109,9 +107,13 @@ array = []
 for i in range (0, N):
     array.append(IntValidation(input('Enter element of array: ')))
 
+K = input('Enter K: ')
+K = IntValidation(K)
 
+rang = input('Enter range of random: ')
+rang = NaturalValidation(rang)
 
-array1 = StrangeSort(array)
+array1 = StrangeSort(array, K, rang)
 print(array1)
 
 value = input('Enter value you want to find: ')
