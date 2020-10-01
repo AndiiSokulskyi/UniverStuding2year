@@ -113,10 +113,14 @@ K = IntValidation(K)
 rang = input('Enter range of random: ')
 rang = NaturalValidation(rang)
 
-array1 = StrangeSort(array, K, rang)
-print(array1)
 
-value = input('Enter value you want to find: ')
-value=IntValidation(value)
+#array1 = StrangeSort(array, K, rang)
+#print(array1)
 
-print('Indexes of elements you need: ', BinarySearch(array1, int(value)))
+#value = input('Enter value you want to find: ')
+#value=IntValidation(value)
+
+#print('Indexes of elements you need: ', BinarySearch(array1, int(value)))
+
+#print(StrangeSort(array, K, rang))
+
