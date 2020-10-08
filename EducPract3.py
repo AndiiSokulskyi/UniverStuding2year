@@ -54,33 +54,27 @@ menu = ''
 while menu!= '3':
     print('1 - Заповнити список вручну.', '\n', '2 - Заповнити список рандомними числами', '\n', '3 - Завершити програму.')
     oper = input('Enter 1 or 2 or 3: ')
-    if oper == '1':
+    print(oper)
+    if oper == '1' or oper == '2':
+        menu = ''
         while menu != 'menu':
             N = input('Enter N: ')
             N = NaturalValidation(N)
             list = LinkedList()
-            for i in range (0, N):
-                list.push_back(IntValidation(input('Enter element of array: ')))
+            if oper == '1':
+                for i in range (0, N):
+                    list.push_back(IntValidation(input('Enter element of array: ')))
+            if oper == '2':
+                rang = input('Enter range of random: ')
+                rang = NaturalValidation(rang)
+                for i in range(0, N):
+                    list.push_back(random.randint(-rang, rang))
+                list.lprint()
             K = input('Enter K: ')
             K = IntValidation(K)
-            rang = input('Enter range of random: ')
-            rang = NaturalValidation(rang)
-            list = LinkListSort(list, K, rang)
-            list.lprint()
-            menu = input('If you want to exit to menu, print "menu", if you want to continue print anything and press Enter: ')
-    elif oper == '2':
-        while menu != 'menu':
-            N = input('Enter N: ')
-            N = NaturalValidation(N)
-            list = LinkedList()
-            rang = input('Enter range of random: ')
-            rang = NaturalValidation(rang)
-            for i in range(0, N):
-                list.push_back(random.randint(-rang, rang))
-            list.lprint()
-            K = input('Enter K: ')
-            K = IntValidation(K)
-            list = LinkListSort(list, K, rang)
+            rang1 = input('Enter range of random: ')
+            rang1 = NaturalValidation(rang1)
+            list = LinkListSort(list, K, rang1)
             list.lprint()
             menu = input('If you want to exit to menu, print "menu", if you want to continue print anything and press Enter: ')
     elif oper == '3':
