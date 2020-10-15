@@ -20,7 +20,7 @@ while menu!= '0':
     menu = ''
     if oper == '0':
         menu = oper
-    while menu != 'menu':
+    while (menu != 'menu') & (menu !='0'):
         if oper == '1':
             idd = ForeignID()
             for i in range(len(dictio)):
@@ -73,5 +73,3 @@ while menu!= '0':
             cl.sort_of_collec(atrb)
             print(cl)
         menu = input('If you want to exit to menu, print "menu", if you want to continue print anything and press Enter: ')
-        if menu == 'menu':
-            break
