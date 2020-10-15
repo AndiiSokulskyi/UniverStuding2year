@@ -17,9 +17,9 @@ while menu!= '0':
           '9 - Сортувати.', '\n',
           )
     oper = input('Enter from 0 to 9: ')
+    menu = ''
     if oper == '0':
         menu = oper
-    menu = ''
     while menu != 'menu':
         if oper == '1':
             idd = ForeignID()
