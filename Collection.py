@@ -17,16 +17,25 @@ class Collection:
     def add_from_file(self, file):
         while True:
             fid = ForeignID()
-            i = 0
             f = file.readline().strip('\n')
             if not f:
                 break
-            while True:
-                if not f:
-                    break
-                fid.set(dictio[i], f)
-                f = file.readline().strip('\n')
-                i += 1
+            fid.set_id(f)
+            f = file.readline().strip('\n')
+            fid.set_country_code(f)
+            f = file.readline().strip('\n')
+            fid.set_passport_no(f)
+            f = file.readline().strip('\n')
+            fid.set_fname(f)
+            f = file.readline().strip('\n')
+            fid.set_lname(f)
+            f = file.readline().strip('\n')
+            fid.set_date_of_birth(f, None)
+            f = file.readline().strip('\n')
+            fid.set_date_of_issue(f, fid.get('date_of_birth'))
+            f = file.readline().strip('\n')
+            fid.set_date_of_expire(f, fid.get('date_of_issue'))
+            f = file.readline().strip('\n')
             self.add_to_collec(fid)
 
     def add_to_file(self, file):
