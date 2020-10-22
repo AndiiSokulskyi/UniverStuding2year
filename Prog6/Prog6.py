@@ -30,14 +30,8 @@ while menu!= '0':
     while (menu != 'menu') & (menu !='0'):
         if oper == '1':
             idd = ForeignID()
-            idd.set_id(input(dictio[0] + ': '))
-            idd.set_country_code(input(dictio[1] + ': '))
-            idd.set_passport_no(input(dictio[2] + ': '))
-            idd.set_fname(input(dictio[3] + ': '))
-            idd.set_lname(input(dictio[4] + ': '))
-            idd.set_date_of_birth(input(dictio[5] + ': '))
-            idd.set_date_of_issue(input(dictio[6] + ': '))
-            idd.set_date_of_expire(input(dictio[7] + ': '))
+            for i in range(8):
+                idd.get(dictio1[i])(input(dictio[i] + ': '))
             MeM.backup()
             cl.add_to_collec(idd)
             print(cl)
@@ -72,7 +66,8 @@ while menu!= '0':
         elif oper == '7':
             iDn = input('Введіть ідентифікатор по якому треба змінити: ')
             ed = input('Введіть значення на яке треба змінити: ')
-            file = rid_writ("Text.txt", "w")
+            txt = input('Введіть назву файлу який треба змінити: ')
+            file = rid_writ(txt, "w")
             MeM.backup()
             cl.edit_file(file, iDn, ed)
             file.close()
