@@ -20,16 +20,9 @@ class Collection:
             f = file.readline().strip('\n')
             if not f:
                 break
-            fid.set_id(f)
-            f = file.readline().strip('\n')
-            fid.set_country_code(f)
-            f = file.readline().strip('\n')
-            fid.set_passport_no(f)
-            f = file.readline().strip('\n')
-            fid.set_fname(f)
-            f = file.readline().strip('\n')
-            fid.set_lname(f)
-            f = file.readline().strip('\n')
+            for i in range (5):
+                getattr(fid, dictio1[i])(f)
+                f = file.readline().strip('\n')
             fid.set_date_of_birth(f, None)
             f = file.readline().strip('\n')
             fid.set_date_of_issue(f, fid.get('date_of_birth'))
@@ -62,22 +55,9 @@ class Collection:
     def edit_collec(self, iDn, ed):
         for i in self.collec:
             for j in range(8):
-                if iDn == 'id':
-                    i.set_id(ed)
-                elif iDn == 'country_code':
-                    i.set_country_code(ed)
-                elif iDn == 'passport_no':
-                    i.set_passport_no(ed)
-                elif iDn == 'fname':
-                    i.set_fname(ed)
-                elif iDn == 'lname':
-                    i.set_lname(ed)
-                elif iDn == 'date_of_birth':
-                    i.set_date_of_birth(ed)
-                elif iDn == 'date_of_issue':
-                    i.set_date_of_issue(ed)
-                elif iDn == 'date_of_expire':
-                    i.set_date_of_expire(ed)
+                if dictio[j] == iDn:
+                    getattr(i, dictio1[j])(ed)
+
 
     def edit_file(self, file, iDn, ed):
         self.edit_collec(iDn, ed)
