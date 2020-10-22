@@ -58,7 +58,7 @@ while menu!= '0':
             iDn = input('Введіть ідентифікатор по якому треба змінити: ')
             ed = input('Введіть значення на яке треба змінити: ')
             txt = input('Введіть назву файлу який треба змінити: ')
-            file = rid_writ("Text.txt", "w")
+            file = rid_writ(txt, "w")
             cl.edit_file(file, iDn, ed)
             file.close()
         elif oper == '8':
