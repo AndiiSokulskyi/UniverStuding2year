@@ -10,6 +10,7 @@
 from Validation import *
 
 dictio={ 0 : 'id', 1 : 'country_code', 2 :'passport_no', 3 :'fname',4 : 'lname', 5 :'date_of_birth', 6 :'date_of_issue',7 : 'date_of_expire'}
+dictio1={ 0 : 'set_id', 1 : 'set_country_code', 2 :'set_passport_no', 3 :'set_fname',4 : 'set_lname', 5 :'set_date_of_birth', 6 :'set_date_of_issue',7 : 'set_date_of_expire'}
 
 class ForeignID:
 
