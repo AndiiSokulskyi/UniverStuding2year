@@ -46,12 +46,12 @@ def strategy(ll):
     if oper == '1':
         pos = 0
         pos = position(ll, pos)
-        con.set_strategy(Strategy1)
+        con.set_strategy(Strategy_Iter)
     elif oper == '2':
         txt = "Text.txt"
         pos = 0
         pos = position(ll, pos)
-        con.set_strategy(Strategy2)
+        con.set_strategy(Strategy_File)
         ll = con.generation(ll, pos, txt)
 
     while True:
@@ -66,12 +66,12 @@ def strategy(ll):
             break
         if oper == '1':
             pos = position(ll, pos)
-            con.set_strategy(Strategy1)
+            con.set_strategy(Strategy_Iter)
         elif oper == '2':
             txt = "Text.txt"
             pos = position(ll, pos)
-            con.set_strategy(Strategy2)
-            ll = con.generation(self, ll, pos, txt)
+            con.set_strategy(Strategy_File)
+            ll = con.generation(ll, pos, txt)
             break
         elif oper == '3':
             N = NatValidation(input('Введіть кількість пар дружніх чисел: '))
@@ -92,11 +92,11 @@ def strategy(ll):
             break
         if oper == '1':
             pos = position(ll, pos)
-            con.set_strategy(Strategy1)
+            con.set_strategy(Strategy_Iter)
         elif oper == '2':
             txt = "Text.txt"
             pos = position(ll, pos)
-            con.set_strategy(Strategy2)
+            con.set_strategy(Strategy_File)
             ll = con.generation(ll, pos, txt)
         elif oper == '3':
             N = NatValidation(input('Введіть кількість пар дружніх чисел: '))
