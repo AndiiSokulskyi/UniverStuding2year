@@ -86,9 +86,7 @@ class Collection:
         self.collec = sorted(self.collec, key=lambda col: col.get(dictio[int(atrb)]).upper())
 
     def save(self):
-        return Memento(self.collec)
+        return Memento(self)
 
     def restore(self, mem = None):
         self.collec = mem.get_collection()
-
-
