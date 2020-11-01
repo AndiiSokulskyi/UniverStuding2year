@@ -1,4 +1,4 @@
-from Memento import *
+from Collection import *
 from Validation import *
 
 @txt_valid
@@ -9,6 +9,7 @@ def rid_writ(txt, mode):
 menu = ''
 cl = Collection()
 MeM = Caretaker(cl)
+MeM.backup()
 while menu!= '0':
     print('0 - Завершити програму.', '\n',
           '1 - Додати до колекції.', '\n',
@@ -32,49 +33,49 @@ while menu!= '0':
             idd = ForeignID()
             for i in range(8):
                 idd.get(dictio1[i])(input(dictio[i] + ': '))
-            MeM.backup()
             cl.add_to_collec(idd)
+            MeM.backup()
             print(cl)
         elif oper == '2':
             file = rid_writ("Text.txt", "r")
-            MeM.backup()
             cl.add_from_file(file)
+            MeM.backup()
             file.close()
             print(cl)
         elif oper == '3':
             file = rid_writ("Text.txt", "w")
-            MeM.backup()
             cl.add_to_file(file)
+            MeM.backup()
             file.close()
         elif oper == '4':
             iDn = input('Введіть ідентифікатор по якому треба видалити: ')
-            MeM.backup()
             cl.delete_from_collec(iDn)
+            MeM.backup()
             print(cl)
         elif oper == '5':
             iDn = input('Введіть ідентифікатор по якому треба видалити з файлу: ')
             file = rid_writ("Text.txt", "w")
-            MeM.backup()
             cl.delete_from_file(file, iDn)
+            MeM.backup()
             file.close()
         elif oper == '6':
             iDn = input('Введіть ідентифікатор по якому треба змінити: ')
             ed = input('Введіть значення на яке треба змінити: ')
-            MeM.backup()
             cl.edit_collec(iDn, ed)
+            MeM.backup()
             print(cl)
         elif oper == '7':
             iDn = input('Введіть ідентифікатор по якому треба змінити: ')
             ed = input('Введіть значення на яке треба змінити: ')
             txt = input('Введіть назву файлу який треба змінити: ')
             file = rid_writ(txt, "w")
-            MeM.backup()
             cl.edit_file(file, iDn, ed)
+            MeM.backup()
             file.close()
         elif oper == '8':
             s = input('Введіть те, що хочете знайти: ')
-            MeM.backup()
             print(cl.find_in_collec(s))
+            MeM.backup()
         elif oper == '9':
             print(' 0 : id', '\n',
                   '1 : country_code', '\n',
@@ -85,8 +86,8 @@ while menu!= '0':
                   '6 : date_of_issue', '\n',
                   '7 : date_of_expire', '\n')
             atrb = input('Введіть атрибут за яким сортувати:')
-            MeM.backup()
             cl.sort_of_collec(atrb)
+            MeM.backup()
             print(cl)
         elif oper == '10':
             MeM.undo()
