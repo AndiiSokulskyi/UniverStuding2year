@@ -18,7 +18,7 @@ class Context:
         return ll
 
 
-class Strategy1():
+class Strategy_Iter():
     def gener(self, ll, N, pos):
         itr = GN_Iterator()
         if pos == 0:
@@ -34,7 +34,7 @@ class Strategy1():
         return ll
 
 
-class Strategy2():
+class Strategy_File():
     def gener(self, ll, txt, pos):
         tpos = pos
         file = file_existing(txt, "r")
