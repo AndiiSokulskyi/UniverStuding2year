@@ -1,4 +1,5 @@
 from datetime import date
+cc_dictio={ 0 : 'ukr', 1 : 'isr', 2 :'pol', 3 :'swz', 4 : 'itl'}
 
 
 def dig_valid(func):
@@ -39,10 +40,12 @@ def cc_valid(func):
     @alfa_valid
     def func_wrapper(self, country_code):
         if country_code != None:
-            if not (country_code.islower() | (
-                    len(country_code) < 4)):  # All country codes have max 3 letters( I`ve googled) )
-                print('It must be country code (small letters, less then 4)')
-                country_code = 'Incorect'
+            for i in range(len(cc_dictio)):
+                if (country_code == cc_dictio[i]):
+                    break
+                if i == len(cc_dictio):
+                    print('It must be country code')
+                    country_code = 'Incorect'
             res = func(self, country_code)
             return res
     return func_wrapper
