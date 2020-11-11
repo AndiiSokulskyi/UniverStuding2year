@@ -20,9 +20,16 @@ class Collection:
             f = file.readline().strip('\n')
             if not f:
                 break
-            for i in range (5):
-                getattr(fid, dictio1[i])(f)
-                f = file.readline().strip('\n')
+            fid.set_id(f)
+            f = file.readline().strip('\n')
+            fid.set_country_code(f)
+            f = file.readline().strip('\n')
+            fid.set_passport_no(f)
+            f = file.readline().strip('\n')
+            fid.set_fname(f)
+            f = file.readline().strip('\n')
+            fid.set_lname(f)
+            f = file.readline().strip('\n')
             fid.set_date_of_birth(f, None)
             f = file.readline().strip('\n')
             fid.set_date_of_issue(f, fid.get('date_of_birth'))
@@ -33,7 +40,7 @@ class Collection:
 
     def add_to_file(self, file):
         for i in self.collec:
-            for j in range(8):
+            for j in range(len(dictio)):
                 file.write(getattr(i, dictio[j]))
                 file.write('\n')
             file.write('\n')
@@ -41,7 +48,7 @@ class Collection:
     def delete_from_collec(self, iDn):
         del_em = []
         for i in self.collec:
-            for j in range(8):
+            for j in range(len(dictio)):
                 if i.get(dictio[j]) == iDn:
                     del_em.append(i)
                     break
