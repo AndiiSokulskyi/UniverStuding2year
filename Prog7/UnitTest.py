@@ -13,8 +13,19 @@ class TestCase(unittest.TestCase):
         self.fid3 = ForeignID('63245125', 'ukr', 'YT987456', 'Yurthik', 'Tyhonlyi',
                          '2000-06-06', '2018-01-20', '2028-01-21')
 
+    def adding(self, int = None):
+        if int == 1:
+            self.cl.add_to_collec(self.fid3)
+        elif int == 2:
+            self.cl.add_to_collec(self.fid)
+            self.cl.add_to_collec(self.fid2)
+        else:
+            self.cl.add_to_collec(self.fid)
+            self.cl.add_to_collec(self.fid2)
+            self.cl.add_to_collec(self.fid3)
+
     def test_add_to_collec(self):
-        self.cl.add_to_collec(self.fid3)
+        self.adding(1)
         self.assertIn(self.fid3, self.cl.get_collec())
 
     def test_add_from_file(self):
@@ -27,9 +38,7 @@ class TestCase(unittest.TestCase):
 
 
     def test_add_to_file(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
-        self.cl.add_to_collec(self.fid3)
+        self.adding()
 
         file = open("TestFile.txt", "w")
         self.cl.add_to_file(file)
@@ -46,9 +55,7 @@ class TestCase(unittest.TestCase):
 
 
     def test_delete_from_collec(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
-        self.cl.add_to_collec(self.fid3)
+        self.adding()
 
         self.cl.delete_from_collec('pol')
         for i in range(len(dictio)):
@@ -58,26 +65,20 @@ class TestCase(unittest.TestCase):
 
 
     def test_delete_from_file(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
-        self.cl.add_to_collec(self.fid3)
+        self.adding()
         cl1 = Collection()
-
         file = open("TestFile.txt", "w")
         self.cl.delete_from_file(file, '63245125')
         file.close()
-
         file = open("TestFile.txt", "r")
         cl1.add_from_file(file)
         file.close()
-
         for i in range(len(dictio)):
             self.assertEqual(self.fid.get(dictio[i]), cl1.get_collec()[0].get(dictio[i]))
             self.assertEqual(len(cl1.get_collec()), 2)
 
     def test_edit_collec(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
+        self.adding(2)
 
         self.cl.edit_collec('country_code', 'pol')
         for i in range(len(dictio)):
@@ -85,8 +86,7 @@ class TestCase(unittest.TestCase):
             self.assertEqual('pol', self.cl.get_collec()[1].get(dictio[1]))
 
     def test_edit_file(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
+        self.adding(2)
 
         cl1 = Collection()
 
@@ -103,16 +103,6 @@ class TestCase(unittest.TestCase):
             self.assertEqual('pol', cl1.get_collec()[0].get(dictio[1]))
             self.assertEqual('pol', cl1.get_collec()[1].get(dictio[1]))
 
-    def test_find_in_collec(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
-
-    def test_sort_of_collec(self):
-        self.cl.add_to_collec(self.fid)
-        self.cl.add_to_collec(self.fid2)
-        self.cl.add_to_collec(self.fid3)
-        self.cl.sort_of_collec('0')
-        cl1 = sorted(self.cl.collec, key=lambda col: col.get(dictio[int('0')]).upper())
 
 
 
