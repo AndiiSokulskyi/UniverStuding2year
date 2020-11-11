@@ -38,6 +38,16 @@ class ForeignID:
     def get(self, atrb):
         return getattr(self, atrb)
 
+    def set(self, Fid):
+        self.set_id(Fid.id)
+        self.set_country_code(Fid.country_code)
+        self.set_passport_no(Fid.passport_no)
+        self.set_fname(Fid.fname)
+        self.set_lname(Fid.lname)
+        self.set_date_of_birth(Fid.date_of_birth, None)
+        self.set_date_of_issue(Fid.date_of_issue, self.date_of_birth)
+        self.set_date_of_expire(Fid.date_of_expire, self.date_of_issue)
+
     @id_valid
     def set_id(self, elem):
         self.id = elem
