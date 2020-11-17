@@ -17,16 +17,16 @@ class ForeignID:
     def __init__(self, id = None, country_code = None, passport_no = None,
                  fname = None, lname =None, date_of_birth = None,
                  date_of_issue = None ,date_of_expire = None):
-        for i in range(len(dictio)):
-            setattr(self, dictio[i], None)
+       # for i in range(len(dictio)):
+         #   setattr(self, dictio[i], None)
         self.set_id(id)
         self.set_country_code(country_code)
         self.set_passport_no(passport_no)
         self.set_fname(fname)
         self.set_lname(lname)
-        self.set_date_of_birth(date_of_birth, None)
-        self.set_date_of_issue(date_of_issue, self.date_of_birth)
-        self.set_date_of_expire(date_of_expire, self.date_of_issue)
+        self.set_date_of_birth(date_of_birth)
+        self.set_date_of_issue(date_of_issue)
+        self.set_date_of_expire(date_of_expire)
 
 
     def __str__(self):
@@ -38,47 +38,31 @@ class ForeignID:
     def get(self, atrb):
         return getattr(self, atrb)
 
-    def set(self, Fid):
-        self.set_id(Fid.id)
-        self.set_country_code(Fid.country_code)
-        self.set_passport_no(Fid.passport_no)
-        self.set_fname(Fid.fname)
-        self.set_lname(Fid.lname)
-        self.set_date_of_birth(Fid.date_of_birth, None)
-        self.set_date_of_issue(Fid.date_of_issue, self.date_of_birth)
-        self.set_date_of_expire(Fid.date_of_expire, self.date_of_issue)
+    def set(self, atrb, elem):
+        for i in range(len(dictio)):
+            if dictio[i] == atrb:
+                getattr(self, dictio1[i])(elem)
 
-    @id_valid
     def set_id(self, elem):
-        self.id = elem
+        self.id = Validation.id_valid(elem)
 
-    @cc_valid
     def set_country_code(self, elem):
-        self.country_code = elem
+        self.country_code = Validation.cc_valid(elem)
 
-    @pn_valid
     def set_passport_no(self, elem):
-        self.passport_no = elem
+        self.passport_no = Validation.pn_valid(elem)
 
-    @alfa_valid
     def set_fname(self, elem):
-        self.fname = elem
+        self.fname = Validation.alfa_valid(elem)
 
-    @alfa_valid
     def set_lname(self, elem):
-        self.lname = elem
+        self.lname = Validation.alfa_valid(elem)
 
-    @birth_valid
-    @date_valid
-    def set_date_of_birth(self, elem, date):
-        self.date_of_birth = elem
+    def set_date_of_birth(self, elem):
+        self.date_of_birth = Validation.birth_valid(elem)
 
-    @issue_valid
-    @date_valid
-    def set_date_of_issue(self, elem, date):
-        self.date_of_issue = elem
+    def set_date_of_issue(self, elem):
+        self.date_of_issue = Validation.issue_valid(elem, self.date_of_birth)
 
-    @expire_valid
-    @date_valid
-    def set_date_of_expire(self, elem, date):
-        self.date_of_expire = elem
+    def set_date_of_expire(self, elem):
+        self.date_of_expire = Validation.expire_valid(elem, self.date_of_issue)
