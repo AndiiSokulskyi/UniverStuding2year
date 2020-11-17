@@ -1,9 +1,9 @@
 from Collection import *
 from Validation import *
 
-@txt_valid
+
 def rid_writ(txt, mode):
-    f = open(txt, mode)
+    f = Validation.file_existing(txt, mode)
     return f
 
 menu = ''
