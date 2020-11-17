@@ -18,7 +18,8 @@ class Collection:
         copy_collec = Collection()
         for i in self.collec:
             fid = ForeignID()
-            fid.set(i)
+            for j in range(len(dictio)):
+                fid.set(dictio[j], i.get(dictio[j]))
             copy_collec.add_to_collec(fid)
         return copy_collec.collec
 
@@ -31,28 +32,15 @@ class Collection:
             f = file.readline().strip('\n')
             if not f:
                 break
-            fid.set_id(f)
-            f = file.readline().strip('\n')
-            fid.set_country_code(f)
-            f = file.readline().strip('\n')
-            fid.set_passport_no(f)
-            f = file.readline().strip('\n')
-            fid.set_fname(f)
-            f = file.readline().strip('\n')
-            fid.set_lname(f)
-            f = file.readline().strip('\n')
-            fid.set_date_of_birth(f, None)
-            f = file.readline().strip('\n')
-            fid.set_date_of_issue(f, fid.get('date_of_birth'))
-            f = file.readline().strip('\n')
-            fid.set_date_of_expire(f, fid.get('date_of_issue'))
-            f = file.readline().strip('\n')
+            for i in range(len(dictio)):
+                fid.set(dictio[i], f)
+                f = file.readline().strip('\n')
             self.add_to_collec(fid)
 
     def add_to_file(self, file):
         for i in self.collec:
             for j in range(len(dictio)):
-                file.write(getattr(i, dictio[j]))
+                file.write(i.get(dictio[j]))
                 file.write('\n')
             file.write('\n')
 
@@ -87,7 +75,7 @@ class Collection:
             for j in range(len(dictio)):
                 if string == str(i.get(dictio[j]))[0:len(string)]:
                     tempo.add_to_collec(i)
-        if tempo == []:
+        if tempo.get_collec() == []:
             return
         else:
             return tempo
