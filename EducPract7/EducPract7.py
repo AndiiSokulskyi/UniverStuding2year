@@ -46,6 +46,19 @@ def LinkListSort(list, K, rang, obs):
     return list
 
 
+def threading_start_join(func, func1, *args):
+    if func != func1:
+        th = Thread(target=func, args=args)
+        th1 = Thread(target=func1, args=args)
+    else:
+        th = Thread(target=func, args=(args[0], *args[2:5]))
+        th1 = Thread(target=func1, args=(args[1], *args[2:5]))
+    th.start()
+    th1.start()
+    th.join()
+    th1.join()
+
+
 def actions(ll, ll1, obs):
     while True:
         print(' 4 - Видалити елемент за вказаною позицією', '\n',
@@ -58,32 +71,17 @@ def actions(ll, ll1, obs):
             break
         if oper == '4':
             pos = IntValidation(input('Введіть позицію: '))
-            th = Thread(target=ll.ldel, args=(pos, obs))
-            th1 = Thread(target=ll1.ldel, args=(pos, obs))
-            th.start()
-            th1.start()
-            th.join()
-            th1.join()
+            threading_start_join(ll.ldel, ll1.ldel, pos, obs)
         elif oper == '5':
             pos1 = IntValidation(input('Введіть початкову позицію: '))
             pos2 = IntValidation(input('Введіть кінцеву позицію: '))
-            th = Thread(target=ll.ldel, args=(pos1, obs, pos2))
-            th1 = Thread(target=ll1.ldel, args=(pos1, obs, pos2))
-            th.start()
-            th1.start()
-            th.join()
-            th1.join()
+            threading_start_join(ll.ldel, ll1.ldel, pos1, obs, pos2)
         elif oper == '6':
             K = input('Enter K: ')
             K = IntValidation(K)
             rang = input('Enter range of random: ')
             rang = NatValidation(rang)
-            th = Thread(target=LinkListSort, args=(ll, K, rang, obs))
-            th1 = Thread(target=LinkListSort, args=(ll1, K, rang, obs))
-            th.start()
-            th1.start()
-            th.join()
-            th1.join()
+            threading_start_join(LinkListSort, LinkListSort, ll, ll1, K, rang, obs)
         elif oper == '7':
             print("first list: ")
             ll.lprint()
