@@ -1,9 +1,6 @@
 from Strategy import *
 from random import randint
 from threading import Thread
-from time import sleep
-
-
 
 
 def position(ll, pos):
@@ -46,17 +43,15 @@ def LinkListSort(list, K, rang, obs):
     return list
 
 
-def threading_start_join(func, func1, *args):
-    if func != func1:
-        th = Thread(target=func, args=args)
-        th1 = Thread(target=func1, args=args)
-    else:
-        th = Thread(target=func, args=(args[0], *args[2:5]))
-        th1 = Thread(target=func1, args=(args[1], *args[2:5]))
-    th.start()
-    th1.start()
-    th.join()
-    th1.join()
+def threading_start_join(func, lists, *args):
+    for list in lists:
+        th = Thread(target=func, args=(list, *args))
+        th.start()
+        th.join()
+
+
+def dell(ll, pos, obs, pos2=None):
+    ll.ldel(pos, obs, pos2)
 
 
 def actions(ll, ll1, obs):
@@ -71,17 +66,17 @@ def actions(ll, ll1, obs):
             break
         if oper == '4':
             pos = IntValidation(input('Введіть позицію: '))
-            threading_start_join(ll.ldel, ll1.ldel, pos, obs)
+            threading_start_join(dell, [ll, ll1], pos, obs)
         elif oper == '5':
             pos1 = IntValidation(input('Введіть початкову позицію: '))
             pos2 = IntValidation(input('Введіть кінцеву позицію: '))
-            threading_start_join(ll.ldel, ll1.ldel, pos1, obs, pos2)
+            threading_start_join(dell, [ll, ll1], pos1, obs, pos2)
         elif oper == '6':
             K = input('Enter K: ')
             K = IntValidation(K)
             rang = input('Enter range of random: ')
             rang = NatValidation(rang)
-            threading_start_join(LinkListSort, LinkListSort, ll, ll1, K, rang, obs)
+            threading_start_join(LinkListSort, [ll, ll1], K, rang, obs)
         elif oper == '7':
             print("first list: ")
             ll.lprint()
@@ -89,6 +84,7 @@ def actions(ll, ll1, obs):
             ll1.lprint()
 
     obs.logger_print_in_file("ObserverFile.txt")
+
 
 def creation(ll, obs):
     con = Context()
