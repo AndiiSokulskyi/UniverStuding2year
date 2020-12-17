@@ -5,7 +5,7 @@ from .validators import Validation
 
 
 class ForeignIDDetailSerializer(serializers.ModelSerializer):
-    #user_id = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    user_id = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = ForeignID
