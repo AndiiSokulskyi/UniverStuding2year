@@ -27,9 +27,8 @@ while menu!= '0':
     while (menu != 'menu') & (menu !='0'):
         if oper == '1':
             idd = ForeignID()
-            for i in range(len(dictio)):
-                pre = dictio[i] + ': '
-                idd.set(dictio[i], input(pre))
+            for i in range(8):
+                idd.get(dictio1[i])(input(dictio[i] + ': '))
             cl.add_to_collec(idd)
             print(cl)
         elif oper == '2':
@@ -58,7 +57,8 @@ while menu!= '0':
         elif oper == '7':
             iDn = input('Введіть ідентифікатор по якому треба змінити: ')
             ed = input('Введіть значення на яке треба змінити: ')
-            file = rid_writ("Text.txt", "w")
+            txt = input('Введіть назву файлу який треба змінити: ')
+            file = rid_writ(txt, "w")
             cl.edit_file(file, iDn, ed)
             file.close()
         elif oper == '8':
