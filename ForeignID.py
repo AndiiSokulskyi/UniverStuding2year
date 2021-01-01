@@ -17,16 +17,13 @@ class ForeignID:
     def __init__(self, id = None, country_code = None, passport_no = None,
                  fname = None, lname =None, date_of_birth = None,
                  date_of_issue = None ,date_of_expire = None):
-        for i in range(len(dictio)):
-            setattr(self, dictio[i], None)
+
         self.set_id(id)
         self.set_country_code(country_code)
         self.set_passport_no(passport_no)
         self.set_fname(fname)
         self.set_lname(lname)
-        self.set_date_of_birth(date_of_birth, None)
-        self.set_date_of_issue(date_of_issue, self.date_of_birth)
-        self.set_date_of_expire(date_of_expire, self.date_of_issue)
+
 
 
     def __str__(self):
@@ -38,37 +35,3 @@ class ForeignID:
     def get(self, atrb):
         return getattr(self, atrb)
 
-    @id_valid
-    def set_id(self, elem):
-        self.id = elem
-
-    @cc_valid
-    def set_country_code(self, elem):
-        self.country_code = elem
-
-    @pn_valid
-    def set_passport_no(self, elem):
-        self.passport_no = elem
-
-    @alfa_valid
-    def set_fname(self, elem):
-        self.fname = elem
-
-    @alfa_valid
-    def set_lname(self, elem):
-        self.lname = elem
-
-    @birth_valid
-    @date_valid
-    def set_date_of_birth(self, elem, date):
-        self.date_of_birth = elem
-
-    @issue_valid
-    @date_valid
-    def set_date_of_issue(self, elem, date):
-        self.date_of_issue = elem
-
-    @expire_valid
-    @date_valid
-    def set_date_of_expire(self, elem, date):
-        self.date_of_expire = elem
